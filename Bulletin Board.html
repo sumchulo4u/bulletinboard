@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Quill & Lens Society</title>
+  <style>
+    :root {
+      --sea-blue: #00b4d8;
+      --aqua: #90e0ef;
+      --navy: #023e8a;
+      --white: #ffffff;
+      --text-dark: #03045e;
+      --light-gray: #f8f9fa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--light-gray);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 180, 216, 0.9);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      color: var(--white);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    nav h1 {
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--aqua);
+    }
+
+    /* Hero */
+    header {
+      background: linear-gradient(rgba(0, 180, 216, 0.85), rgba(0, 180, 216, 0.85)),
+      url("https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+      height: 100vh;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 1.5s ease;
+    }
+
+    header h2 {
+      font-size: 2.7rem;
+      margin-bottom: 1rem;
+      animation: slideIn 1.2s ease;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: var(--white);
+      color: var(--sea-blue);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--aqua);
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    section h3 {
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 2rem;
+    }
+
+    /* Blog Section */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .card-content h4 {
+      color: var(--sea-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* Creator Section */
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .creator {
+      background: var(--aqua);
+      padding: 1.8rem;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .creator:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Join Section */
+    .join {
+      background: var(--sea-blue);
+      color: var(--white);
+      border-radius: 20px;
+      max-width: 700px;
+      margin: auto;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .join input {
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-right: 0.5rem;
+      width: 220px;
+    }
+
+    .join button {
+      padding: 0.7rem 1.2rem;
+      background: var(--white);
+      color: var(--sea-blue);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .join button:hover {
+      background: var(--aqua);
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--aqua);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <h1>🪶 QnL Society</h1>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#blog">Buzz</a></li>
+      <li><a href="#creators">Crew</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#join">Join</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home">
+    <h2>The Spotlight 🎬</h2>
+    <p>Welcome to our world. The place where stories get loud, creativity gets messy, and every post feels like a vibe. You’re reading the Quill & Lens Society.</p>
+    <a href="#blog" class="btn">Check what's trending👀</a>
+  </header>
+
+  <!-- Blog -->
+  <section id="blog">
+    <h3>Latest Buzz 🗞️</h3>
+    <div class="blog-grid">
+      <div class="card">
+        <img src="speech day.jpg" />
+        <div class="card-content">
+          <h4>What Really Happened at Speech & Prize Day</h4>
+         
+          <p>Kofi almost slipped trying to climb the staircase. Oops!.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="party.png" />
+        <div class="card-content">
+          <h4>Behind the Scenes</h4>
+          <p>The fun,dance and party when lectures aren't in session.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="campus.jpg" />
+        <div class="card-content">
+          <h4>Caught on Campus</h4>
+          <p>Random moments. Real laughs. Unfiltered campus life through our lens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creators -->
+  <section id="creators">
+    <h3>Meet the Crew 💡</h3>
+    <div class="creator-grid">
+      <div class="creator">
+        <h4>Asare</h4>
+        <p>The poetic guy,typical nerd. Turns something into nothing all the time</p>
+      </div>
+      <div class="creator">
+        <h4>Michelle</h4>
+        <p>Our mastermind and blogger. Fast typer, faster thinker.</p>
+      </div>
+      <div class="creator">
+        <h4>Francis</h4>
+        <p>Quotes, jokes, and everything woke. The dude always has something to say.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events">
+    <h3>What’s Coming Up 📅</h3>
+    <p>Club collabs, interviews, and the photo contest everyone’s hyped about. Stay tuned.</p>
+  </section>
+
+  <!-- Join -->
+  <section id="join" class="join">
+    <h3>Join the Crew 🚀</h3>
+    <p>Got a thing for words, pixels, or a little drama with purpose? We see you. Come vibe with us.</p>
+    <form>
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit">Count Me In ✍️</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>“We say what others whisper.” — The Quill & Lens Society</p>
+    <p>
+      <a href="#">Instagram</a> |
+      <a href="#">Snapchat</a> |
+      <a href="#">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    // Smooth scroll highlight for nav links
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 80;
+        if (pageYOffset >= sectionTop) current = section.getAttribute("id");
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
